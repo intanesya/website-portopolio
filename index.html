@@ -1,0 +1,853 @@
+
+
+<!DOCTYPE html>
+<html lang="id">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Portfolio | Intan Nurjamilah</title>
+
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://unpkg.com/aos@2.3.1/dist/aos.css" />
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+
+    <style>
+        :root {
+            --primary: #ff4da6;
+            --secondary: #a855f7;
+            --dark-bg: #0f0c29;
+            --card-bg: rgba(255, 255, 255, 0.05);
+            --text-light: #ffffff;
+        }
+
+        body {
+            font-family: 'Poppins', sans-serif;
+            margin: 0;
+            background: #ffe6f2;
+            color: #333;
+            transition: 0.4s;
+            scroll-behavior: smooth;
+        }
+
+        body.dark {
+            background: linear-gradient(135deg, #0f0c29 0%, #302b63 50%, #24243e 100%);
+            color: var(--text-light);
+        }
+
+        /* NAVIGATION */
+        nav {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 15px 10%;
+            background: white;
+            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+            position: sticky;
+            top: 0;
+            z-index: 1000;
+        }
+
+        .dark nav {
+            background: rgba(15, 12, 41, 0.9);
+            backdrop-filter: blur(10px);
+        }
+
+        nav .logo {
+            font-weight: 700;
+            font-size: 1.2rem;
+            color: var(--primary);
+        }
+
+        nav a {
+            text-decoration: none;
+            margin-left: 20px;
+            color: inherit;
+            font-weight: 500;
+            transition: 0.3s;
+        }
+
+        nav a:hover { color: var(--primary); }
+
+        /* HERO SECTION */
+        .hero-section {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            flex-wrap: wrap;
+            padding: 80px 10%;
+            gap: 40px;
+        }
+
+        .hero-content { flex: 1; min-width: 300px; }
+        .hero-content h1 { font-size: 3.5rem; line-height: 1.2; margin: 0; }
+        .hero-content p { color: #666; margin: 20px 0; max-width: 500px; line-height: 1.6; }
+        .dark .hero-content p { color: #ccc; }
+
+        .profile-container { position: relative; width: 300px; height: 300px;}
+        .profile-img {
+            width: 100%; height: 100%; border-radius: 50%;
+            object-fit: cover; border: 4px solid var(--primary);
+            box-shadow: 0 0 30px rgba(255, 77, 166, 0.3);
+        }
+
+        /* SKILL BADGES */
+        .skills-grid {
+            display: flex;
+            justify-content: center;
+            gap: 15px;
+            flex-wrap: wrap;
+            margin-bottom: 50px;
+            padding: 0 10%;
+        }
+
+        .skill-badge {
+            background: white;
+            padding: 10px 20px;
+            border-radius: 12px;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            box-shadow: 0 4px 10px rgba(0,0,0,0.05);
+            transition: 0.3s;
+            font-weight: 600;
+        }
+
+        .dark .skill-badge {
+            background: var(--card-bg);
+            color: white;
+            border: 1px solid rgba(255,255,255,0.1);
+        }
+
+        .skill-badge:hover {
+            transform: translateY(-5px);
+            border-color: var(--primary);
+            box-shadow: 0 5px 15px rgba(255, 77, 166, 0.3);
+        }
+
+        .skill-badge i { color: var(--primary); font-size: 1.2rem; }
+
+        /* STATS GRID */
+        .stats-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 20px; padding: 0 10%; margin-bottom: 50px;
+        }
+
+        .stat-card {
+            background: white; padding: 25px; border-radius: 20px;
+            display: flex; justify-content: space-between; align-items: center;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.05);
+        }
+
+        .dark .stat-card { background: var(--card-bg); color: white; border: 1px solid rgba(255,255,255,0.1); }
+        .stat-card h3 { font-size: 2.5rem; margin: 0; color: var(--primary); }
+
+        /* FILTER BUTTONS */
+        .filter-container { margin-bottom: 30px; display: flex; justify-content: center; gap: 10px; flex-wrap: wrap; }
+
+        /* PORTFOLIO SHOWCASE */
+        .section { padding: 80px 10%; text-align: center; }
+        .project-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 25px; margin-top: 40px;
+        }
+
+        .project-card {
+            background: white; border-radius: 20px; overflow: hidden;
+            box-shadow: 0 10px 20px rgba(0, 0, 0, 0.05); transition: 0.4s; text-align: left;
+        }
+
+        .dark .project-card { background: var(--card-bg); color: white; border: 1px solid rgba(255,255,255,0.1); }
+        .project-card:hover { transform: translateY(-10px); }
+        .project-preview { height: 180px; background: #333; display: flex; align-items: center; justify-content: center; font-size: 3rem; }
+        .project-info { padding: 20px; }
+
+        /* CONTACT FORM */
+        .contact-container { display: grid; grid-template-columns: 1fr 2fr; gap: 30px; text-align: left; }
+        .card { background: white; padding: 30px; border-radius: 20px; box-shadow: 0 10px 30px rgba(0, 0, 0, 0.05); }
+        .dark .card { background: var(--card-bg); color: white; border: 1px solid rgba(255,255,255,0.1); }
+
+        input, textarea {
+            width: 100%; padding: 12px; margin-bottom: 15px; border-radius: 10px;
+            border: 1px solid #ddd; background: rgba(255, 255, 255, 0.8); box-sizing: border-box;
+        }
+
+        .dark input, .dark textarea { background: rgba(255, 255, 255, 0.05); border: 1px solid #444; color: white; }
+
+        .btn { padding: 12px 25px; border-radius: 25px; border: none; cursor: pointer; font-weight: 600; transition: 0.3s; }
+        .btn-main { background: var(--primary); color: white; }
+        .btn-outline { background: transparent; border: 2px solid var(--primary); color: var(--primary); }
+        .dark .btn-outline { color: white; border-color: white; }
+
+        .comment-box { background: white; border-radius: 20px; padding: 30px; margin-top: 50px; text-align: left; }
+        .dark .comment-box { background: var(--card-bg); color: white; border: 1px solid rgba(255,255,255,0.1); }
+        .avatar { width: 45px; height: 45px; border-radius: 50%; background: var(--primary); display: flex; align-items: center; justify-content: center; color: white; font-weight: bold; }
+
+       /* PERBAIKAN KHUSUS MOBILE */
+@media (max-width: 768px) {
+    .hero-section {
+        flex-direction: column-reverse; /* Memutar urutan: Foto di ATAS, Teks di BAWAH */
+        padding: 40px 5%;
+        text-align: center; /* Teks jadi rata tengah di HP agar lebih rapi */
+    }
+
+    .hero-content {
+        min-width: 100%;
+    }
+
+    .hero-content h1 {
+        font-size: 2.2rem; /* Ukuran font judul diperkecil agar tidak kepotong */
+    }
+
+    .hero-content p {
+        margin: 15px auto;
+    }
+
+    .profile-container {
+        width: 180px; /* Ukuran foto disesuaikan untuk layar HP */
+        height: 180px;
+        margin: 0 auto 20px auto; /* Memberi jarak bawah ke teks */
+    }
+
+    .hero-content div {
+        justify-content: center; /* Tombol jadi di tengah */
+        flex-direction: column; /* Tombol susun ke bawah agar tidak sempit */
+        gap: 10px;
+    }
+
+    /* Penyesuaian Grid Skill agar tidak berantakan */
+    .skills-grid {
+        gap: 10px;
+        padding: 0 5%;
+    }
+    
+    .skill-badge {
+        font-size: 0.8rem;
+        padding: 8px 15px;
+    }
+}
+    .social-links {
+    display: flex;
+    gap: 20px;
+    padding-left: 5px; /* Sedikit geser agar sejajar dengan awal tombol */
+}
+
+.social-links a {
+    font-size: 1.3rem; /* Ukuran ikon sosial media */
+    color: var(--primary);
+    transition: 0.3s;
+}
+
+.social-links a:hover {
+    transform: translateY(-3px);
+    opacity: 0.8;
+}
+
+/* Biar tetap di tengah kalau di tampilan HP */
+@media (max-width: 768px) {
+    .hero-btns, .social-links {
+        justify-content: center;
+        padding-left: 0;
+    }
+}
+.modal {
+    display: none; 
+    position: fixed; 
+    z-index: 2000; 
+    left: 0; top: 0;
+    width: 100%; height: 100%;
+    background-color: rgba(0,0,0,0.6);
+    backdrop-filter: blur(5px);
+}
+
+.modal-content {
+    background-color: white;
+    margin: 10% auto;
+    padding: 30px;
+    border-radius: 20px;
+    width: 80%;
+    max-width: 600px;
+    position: relative;
+    animation: slideDown 0.4s ease;
+}
+
+.dark .modal-content {
+    background-color: var(--dark-bg);
+    color: white;
+    border: 1px solid var(--primary);
+}
+
+@keyframes slideDown {
+    from { transform: translateY(-50px); opacity: 0; }
+    to { transform: translateY(0); opacity: 1; }
+}
+
+.close-btn {
+    position: absolute;
+    right: 20px;
+    top: 15px;
+    font-size: 28px;
+    cursor: pointer;
+    color: var(--primary);
+}
+.modal {
+    display: none; 
+    position: fixed; 
+    z-index: 2000; 
+    left: 0; top: 0;
+    width: 100%; height: 100%;
+    background-color: rgba(0,0,0,0.7);
+    backdrop-filter: blur(5px);
+}
+.modal-content {
+    background: white;
+    margin: 5% auto; /* Jarak atas diperkecil supaya muat lebih banyak */
+    padding: 35px;
+    border-radius: 25px;
+    width: 90%;
+    max-width: 800px; /* Ukuran diperlebar dari 500px ke 800px */
+    max-height: 85vh; /* Batas tinggi agar tidak melebihi layar */
+    overflow-y: auto; /* Bisa di-scroll kalau isinya panjang */
+    animation: slideDown 0.4s ease;
+    position: relative;
+}
+
+/* Tambahan CSS untuk galeri foto di dalam modal */
+.evidence-gallery {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+    gap: 15px;
+    margin-top: 20px;
+}
+
+.evidence-img {
+    width: 100%;
+    height: 150px;
+    object-fit: cover;
+    border-radius: 12px;
+    border: 2px solid #eee;
+    transition: 0.3s;
+}
+
+.evidence-img:hover {
+    transform: scale(1.05);
+    border-color: var(--primary);
+}
+/* Efek saat tombol disentuh/hover */
+.btn-main:hover {
+    transform: scale(1.1); /* Tombol membesar sedikit */
+    box-shadow: 0 0 20px rgba(255, 77, 166, 0.6); /* Efek cahaya pink menyala */
+    transition: 0.3s ease; /* Gerakan halus */
+}
+
+/* Efek animasi berdenyut terus-menerus agar menarik perhatian */
+.btn-play-animation {
+    animation: pulse-pink 2s infinite;
+}
+
+@keyframes pulse-pink {
+    0% { transform: scale(1); box-shadow: 0 0 0 0 rgba(255, 77, 166, 0.7); }
+    70% { transform: scale(1.05); box-shadow: 0 0 0 10px rgba(255, 77, 166, 0); }
+    100% { transform: scale(1); box-shadow: 0 0 0 0 rgba(255, 77, 166, 0); }
+}
+
+/* Efek goyang saat diklik (active) */
+.btn-main:active {
+    transform: scale(0.95); /* Sedikit mengecil saat ditekan */
+}
+/* CSS Tambahan untuk Foto Kotak di Modal */
+.evidence-container {
+    display: flex;
+    justify-content: center;
+    gap: 15px;
+    margin-top: 20px;
+    flex-wrap: wrap;
+}
+
+.box-photo {
+    width: 150px;      /* Ukuran kotak */
+    height: 150px;     /* Ukuran kotak */
+    object-fit: cover; /* Agar foto tidak gepeng */
+    border-radius: 12px;
+    border: 2px solid var(--primary);
+    box-shadow: 0 5px 15px rgba(255, 77, 166, 0.2);
+}
+/* Efek Hover Khusus Link di Modal */
+.modal-content .btn-main:hover {
+    box-shadow: 0 0 20px var(--primary);
+    transform: translateY(-2px);
+}
+
+/* Animasi tambahan untuk list */
+.modal-content ul li {
+    list-style: none;
+    position: relative;
+    margin-bottom: 8px;
+}
+
+.modal-content ul li::before {
+    content: "▹";
+    color: var(--primary);
+    position: absolute;
+    left: -20px;
+    font-weight: bold;
+}
+    </style>  
+</head>
+
+<body class="dark">
+    <audio id="music" loop>
+        <source src="birds.mp3" type="audio/mpeg">
+    </audio>
+        
+    <nav>
+        <div class="logo">🌸 Intanesya</div>
+        <div>
+            <a href="#about">About</a>
+            <a href="#projects">Portfolio</a>
+            <a href="#skill">Skill</a>
+            <a href="#contact">Contact</a>
+
+            <button onclick="toggleDark()" style="background:none; border:none; cursor:pointer; font-size:1.2rem; margin-left:15px;">🌙</button>
+        </div>
+    </nav>
+
+    <section class="hero-section" id="about">
+        <div class="hero-content" data-aos="fade-right">
+            <h4>✨ Transforming ideas into digital experiences ✨</h4>
+            <h1>Hello, I'm <br><span style="color:var(--primary)">Intan Nurjamilah</span></h1>
+            <p>"Mahasiswi Teknik Informatika dengan pengalaman di bidang Accounting dan Administrasi. Terampil dalam Manajemen Basis Data (SQL), Microsoft Excel (Advanced), serta penggunaan software akuntansi. Saya menggabungkan logika pemrograman dan ketelitian pengolahan data untuk membangun sistem digital yang efisien, aman, dan terstruktur."</p>
+            <div style="display: flex; gap: 15px;">
+                <button class="btn btn-main" onclick="playMusic()">Play Music 🎵</button>
+                <button class="btn btn-outline" onclick="window.open('CV_Intan_Nurjamilah.pdf', '_blank')">Download CV</button>
+                <div class="social-links">
+            <a href="https://www.instagram.com/intanesya_?igsh=eDdneHRjNmV6cG1k" target="_blank"><i class="fab fa-instagram"></i></a>
+            <a href="https://www.linkedin.com/in/intan-nurjamilah-a404323ba" target="_blank"><i class="fab fa-linkedin"></i></a>
+            <a href="https://github.com/intanesya" target="_blank"><i class="fab fa-github"></i></a>  
+            <a href="https://tiktok.com/@intanesya_30" target="_blank" title="TikTok"><i class="fab fa-tiktok"></i></a>
+            </div>
+            </div>
+        </div>
+        <div class="hero-image" data-aos="zoom-in">
+            <div class="profile-container">
+                <img src="foto_aku.jpg" class="profile-img" alt="Profile aku">
+            </div>
+        </div>
+    </section>
+
+    <div class="skills-grid" data-aos="fade-up">
+    <div class="skill-badge" onclick="openSkill('accounting')"><i class="fas fa-file-invoice-dollar"></i> Accounting</div>
+    <div class="skill-badge" onclick="openSkill('admin')"><i class="fas fa-user-tie"></i> Administration</div>
+    <div class="skill-badge" onclick="openSkill('excel')"><i class="fas fa-file-excel"></i> MS Excel Expert</div>
+    <div class="skill-badge" onclick="openSkill('html_css')"><i class="fab fa-html5"></i> HTML & CSS</div>
+    <div class="skill-badge" onclick="openSkill('data_entry')"><i class="fas fa-tasks"></i> Data Entry</div>
+    <div class="skill-badge" onclick="openSkill('data_analysis')"><i class="fas fa-chart-bar"></i> Data Analysis</div>
+</div>
+
+<div id="skillModal" class="modal">
+    <div class="modal-content">
+        <span class="close-btn" onclick="closeModal()">&times;</span>
+        <div id="modalBody"></div>
+    </div>
+</div>
+    <div class="stats-grid" data-aos="fade-up">
+        <div class="stat-card">
+            <div><p>TOTAL PROJECTS</p><span>Innovative solutions</span></div>
+            <h3>11</h3>
+        </div>
+        <div class="stat-card">
+            <div><p>CERTIFICATES</p><span>Skills validated</span></div>
+            <h3>7</h3>
+        </div>
+        <div class="stat-card">
+            <div><p>YEARS EXP.</p><span>Learning journey</span></div>
+            <h3>3</h3>
+        </div>
+    </div>
+    <section id="certificates" style="padding: 40px 10%; text-align: center;">
+    <h2 data-aos="fade-up" style="margin-bottom: 30px; font-size: 1.8rem;">
+        <i class="fas fa-award" style="color: var(--primary);"></i> Featured Certifications
+    </h2>
+    
+    <div class="skills-grid" data-aos="fade-up" style="justify-content: center; gap: 25px; display: flex; flex-wrap: wrap;">
+        
+        <div class="card" style="padding: 15px; width: 350px; text-align: left; border-radius: 20px; overflow: hidden; border: 1px solid rgba(255, 77, 166, 0.3);">
+            <div style="width: 100%; height: 220px; border-radius: 12px; overflow: hidden; margin-bottom: 15px; background: #000;">
+                <iframe src="setifikatcamy.pdf#toolbar=0" width="100%" height="100%" style="border: none;"></iframe>
+            </div>
+            <div style="padding: 0 10px;">
+                <h4 style="margin: 0; font-size: 1rem; color: var(--primary);">Speak with Confidence</h4>
+                <p style="margin: 5px 0 15px; font-size: 0.8rem; opacity: 0.7;">by CAMY Collaboration Academy</p>
+                <a href="setifikatcamy.pdf" target="_blank" class="btn btn-outline" style="display: block; text-align: center; font-size: 0.8rem; padding: 8px; text-decoration: none; border: 1px solid var(--primary); border-radius: 10px; color: white;">
+                    <i class="fas fa-expand"></i> Lihat Full PDF
+                </a>
+            </div>
+        </div>
+
+        <div class="card" style="padding: 15px; width: 350px; text-align: left; border-radius: 20px; overflow: hidden; border: 1px solid rgba(255, 77, 166, 0.3);">
+            <div style="width: 100%; height: 220px; border-radius: 12px; overflow: hidden; margin-bottom: 15px; background: #000;">
+                <iframe src="Certificate.pdf#toolbar=0" width="100%" height="100%" style="border: none;"></iframe>
+            </div>
+            <div style="padding: 0 10px;">
+                <h4 style="margin: 0; font-size: 1rem; color: var(--primary);">AI Fundamentals</h4>
+                <p style="margin: 5px 0 15px; font-size: 0.8rem; opacity: 0.7;">Skill Our Future | Microsoft</p>
+                <a href="Certificate.pdf" target="_blank" class="btn btn-outline" style="display: block; text-align: center; font-size: 0.8rem; padding: 8px; text-decoration: none; border: 1px solid var(--primary); border-radius: 10px; color: white;">
+                    <i class="fas fa-expand"></i> Lihat Full PDF
+                </a>
+            </div>
+        </div>
+
+        <div class="card" style="padding: 15px; width: 350px; text-align: left; border-radius: 20px; overflow: hidden; border: 1px solid rgba(255, 77, 166, 0.3);">
+            <div style="width: 100%; height: 220px; border-radius: 12px; overflow: hidden; margin-bottom: 15px; background: #000;">
+                <iframe src="hacktiv_sertifikat.pdf#toolbar=0" width="100%" height="100%" style="border: none;"></iframe>
+            </div>
+            <div style="padding: 0 10px;">
+                <h4 style="margin: 0; font-size: 1rem; color: var(--primary);">AI Fundamentals</h4>
+                <p style="margin: 5px 0 15px; font-size: 0.8rem; opacity: 0.7;">Skill Our Future | Microsoft</p>
+                <a href="hacktiv_sertifikat.pdf" target="_blank" class="btn btn-outline" style="display: block; text-align: center; font-size: 0.8rem; padding: 8px; text-decoration: none; border: 1px solid var(--primary); border-radius: 10px; color: white;">
+                    <i class="fas fa-expand"></i> Lihat Full PDF
+                </a>
+            </div>
+        </div>
+
+        <div class="card" style="padding: 15px; width: 350px; text-align: left; border-radius: 20px; overflow: hidden; border: 1px solid rgba(255, 77, 166, 0.3);">
+            <div style="width: 100%; height: 220px; border-radius: 12px; overflow: hidden; margin-bottom: 15px; background: #000;">
+                <iframe src="Intan Nurjamilah.pdf#toolbar=0" width="100%" height="100%" style="border: none;"></iframe>
+            </div>
+            <div style="padding: 0 10px;">
+                <h4 style="margin: 0; font-size: 1rem; color: var(--primary);">AI Fundamentals</h4>
+                <p style="margin: 5px 0 15px; font-size: 0.8rem; opacity: 0.7;">Skill Our Future | Microsoft</p>
+                <a href="Intan Nurjamilah.pdf" target="_blank" class="btn btn-outline" style="display: block; text-align: center; font-size: 0.8rem; padding: 8px; text-decoration: none; border: 1px solid var(--primary); border-radius: 10px; color: white;">
+                    <i class="fas fa-expand"></i> Lihat Full PDF
+                </a>
+            </div>
+        </div>
+
+        <div class="card" style="padding: 15px; width: 350px; text-align: left; border-radius: 20px; overflow: hidden; border: 1px solid rgba(255, 77, 166, 0.3);">
+            <div style="width: 100%; height: 220px; border-radius: 12px; overflow: hidden; margin-bottom: 15px; background: #000;">
+                <iframe src="AI For Research E-Certificate.pdf#toolbar=0" width="100%" height="100%" style="border: none;"></iframe>
+            </div>
+            <div style="padding: 0 10px;">
+                <h4 style="margin: 0; font-size: 1rem; color: var(--primary);">AI Fundamentals</h4>
+                <p style="margin: 5px 0 15px; font-size: 0.8rem; opacity: 0.7;">Skill Our Future | Microsoft</p>
+                <a href="AI For Research E-Certificate.pdf" target="_blank" class="btn btn-outline" style="display: block; text-align: center; font-size: 0.8rem; padding: 8px; text-decoration: none; border: 1px solid var(--primary); border-radius: 10px; color: white;">
+                    <i class="fas fa-expand"></i> Lihat Full PDF
+                </a>
+            </div>
+        </div>
+    </div>
+
+        </div>
+</section>
+</section>
+    <section class="section" id="projects">
+    <h2 data-aos="fade-up">Portfolio Showcase</h2>
+    
+    <div class="filter-container" data-aos="fade-up">
+        <button class="btn btn-outline" onclick="filterProjects('all')">All</button>
+        <button class="btn btn-outline" onclick="filterProjects('accounting')">Accounting/Admin</button>
+        <button class="btn btn-outline" onclick="filterProjects('design')">Design/Art</button>
+    </div>
+
+    <div class="project-grid">
+        <div class="project-card" data-category="accounting" data-aos="zoom-in">
+            <div class="project-preview" style="display: flex; align-items: center; justify-content: center; height: 180px; background: #333;">
+        <img src="foto_kesembilan.jpg" 
+             alt="foto kesembilan" 
+             style="width: 100px; height: 100px; object-fit: contain;">
+    </div>
+            <div class="project-info">
+                <h4>Sistem Pembukuan Kas</h4>
+                <p style="font-size: 0.8rem; opacity: 0.7; min-height: 40px;">Manajemen laporan keuangan harian menggunakan Excel otomatis.</p>
+                <a href="https://docs.google.com/spreadsheets/d/1ovPLVwPGD3RSEDbRVfA4osivMRtNBA58/preview"
+                   target="_blank"
+                   class="btn btn-main"
+                   style="margin-top:15px; display:block; width:100%; text-align:center; text-decoration:none; box-sizing: border-box;"> 
+                   Lihat Proyek
+                </a>
+            </div>
+        </div>
+
+        <div class="project-card" data-category="design" data-aos="zoom-in">
+    <div class="project-preview" >💻</div>
+    <div class="project-info">
+        <h4>NPC System</h4> 
+        <p style="font-size: 0.8rem; opacity: 0.7; min-height: 40px;">Sistem rekomendasi & validasi komponen PC cerdas.</p>
+        
+        <a href="https://github.com/intanesya/NPC-Project.git" 
+           target="_blank" 
+           class="btn btn-main" 
+           style="margin-top:15px; display:block; width:100%; text-align:center; text-decoration:none; box-sizing: border-box;">
+           Lihat Proyek
+        </a>
+    </div>
+</div>
+
+        <div class="project-card" data-category="design" data-aos="zoom-in">
+    <div class="project-preview" style="display: flex; align-items: center; justify-content: center; height: 180px; background: #333;">
+        <img src="foto_kedelapan.jpg" 
+             alt="foto kedelapan" 
+             style="width: 100px; height: 100px; object-fit: contain;">
+    </div>
+    
+    <div class="project-info">
+        <h4>Nura Stylish</h4>
+        <p style="font-size: 0.8rem; opacity: 0.7; min-height: 40px;">Koleksi ilustrasi Cyberpunk & Visual Branding untuk fashion brand.</p>
+        
+        <a href="#" class="btn btn-main" 
+           style="margin-top:15px; display:block; width:100%; text-align:center; text-decoration:none; box-sizing: border-box;">
+           Lihat Bisnis
+        </a>
+    </div>
+</div>
+</section>
+    <section class="section" id="contact">
+        <h2 data-aos="fade-up">Contact Me</h2>
+        <div class="contact-container">
+        <div class="contact-info card" data-aos="fade-right" style="text-align: center;">
+            <h3 style="text-align: center;">Get in Touch</h3>
+            <img src="foto_kedua.jpg" alt="My Photo" style="width: 50%; border-radius: 15px; border: 0px solid var(--primary); margin-top: 10px; object-fit: cover;">
+        </div>
+
+        <form action="https://formspree.io/f/YOUR_ID" method="POST" class="contact-form card" data-aos="fade-left">
+            <input type="text" name="name" placeholder="Your Name" required>
+            <input type="email" name="email" placeholder="Your Email" required>
+            <textarea name="message" rows="4" placeholder="Your Message" required></textarea>
+            <button type="submit" class="btn btn-main" style="width:100%">Send Message</button>
+        </form>
+    </div>
+
+        <div class="comment-box" data-aos="fade-up">
+            <h3>💬 Comments</h3>
+            <div style="display: flex; gap: 10px; margin-bottom: 20px;">
+                <input type="text" id="c-name" placeholder="Nama" style="margin:0;">
+                <input type="text" id="c-text" placeholder="Tulis komentar..." style="margin:0;">
+                <button class="btn btn-main" onclick="postComment()">Kirim</button>
+            </div>
+            <div id="comment-list">
+                
+            </div>
+        </div>
+    </section>
+
+    <footer style="text-align: center; padding: 40px; opacity: 0.6; font-size: 0.8rem;">
+        &copy; 2026 Intan Nurjamilah. Teknik Informatika UTB.
+    </footer>
+
+    <script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
+    <script>
+        AOS.init({ duration: 1000, once: true });
+
+        // Project Filter Logic
+        function filterProjects(category) {
+            const cards = document.querySelectorAll('.project-card');
+            cards.forEach(card => {
+                card.style.display = (category === 'all' || card.getAttribute('data-category') === category) 
+                    ? 'block' : 'none';
+            });
+        }
+
+        function toggleDark() { document.body.classList.toggle("dark"); }
+
+        function playMusic() {
+            const m = document.getElementById("music");
+            m.play().catch(() => alert("Klik layar dulu baru tekan Play!"));
+        } 
+
+        function postComment() {
+            const name = document.getElementById('c-name').value;
+            const text = document.getElementById('c-text').value;
+            if (name && text) {
+                const list = document.getElementById('comment-list');
+                const newItem = document.createElement('div');
+                newItem.className = 'comment-item';
+                newItem.style.display = 'flex';
+                newItem.style.gap = '15px';
+                newItem.style.marginBottom = '15px';
+                newItem.innerHTML = `
+                    <div class="avatar">${name[0].toUpperCase()}</div>
+                    <div><h5 style="margin:0;">${name}</h5><p style="margin:5px 0; font-size:0.9rem;">${text}</p></div>
+                `;
+                list.prepend(newItem);
+                document.getElementById('c-name').value = '';
+                document.getElementById('c-text').value = '';
+            }
+        }
+        const skillData = {
+    accounting: `
+    <h2 style="color:var(--primary); border-bottom: 2px solid #eee; padding-bottom: 10px;">
+        <i class="fas fa-file-invoice-dollar"></i> Accounting Experience
+    </h2>
+    <p style="line-height: 1.8;">
+        Memiliki pengalaman yang solid dalam pengelolaan data keuangan. Fokus utama saya adalah pada ketelitian data dan pelaporan yang sistematis.
+    </p>
+    
+    <div style="margin-top: 20px;">
+        <ul style="padding-left: 20px;">
+            <li>Penyusunan laporan arus kas bulanan secara akurat.</li>
+            <li>Input data transaksi harian dan pengelolaan invoice vendor.</li>
+            <li>Pengarsipan dokumen perpajakan dan administrasi keuangan.</li>
+        </ul>
+    </div>
+
+    <div style="margin-top: 20px;">
+        
+        <div class="evidence-container">
+            <img src="foto_pkl.jpg" alt="Bukti 1" class="box-photo">
+            <img src="foto_ketiga.jpg" alt="Bukti 2" class="box-photo">
+             <img src="foto_ketujuh.jpg" alt="Bukti 2" class="box-photo">
+        </div>
+    </div>
+`,
+    admin: `
+        <h2 style="color:var(--primary)">Administration</h2>
+        <p>Menerapkan efisiensi digital dalam pengelolaan dokumen dan alur kerja kantoran.</p>
+        <ul>
+            <li>Manajemen arsip digital dan korespondensi profesional.</li>
+            <li>Pengaturan jadwal dan optimasi Google Workspace.</li>
+            <li>Pengorganisasian data administratif secara efisien.</li>
+        </ul>
+         <div style="margin-top: 20px;">
+        
+        <div class="evidence-container">
+            <img src="foto_kelima.jpg" alt="Bukti 1" class="box-photo">
+            <img src="foto_keenam.jpg" alt="Bukti 2" class="box-photo">
+            
+        </div>
+    </div>
+        `,
+    excel: `
+        <h2 style="color:var(--primary); border-bottom: 2px solid rgba(255,77,166,0.2); padding-bottom: 10px;">
+            <i class="fas fa-file-excel"></i> MS Excel Expert
+        </h2>
+        <p style="margin-top:15px; opacity:0.9;"> "Sistem Otomatisasi Data Keuangan"</p>
+        
+        <div style="margin: 20px 0;">
+            <ul style="padding-left: 20px; line-height: 1.8; list-style: none;">
+                <li><span style="color:var(--primary); margin-right:8px;"></span> <b>Sistem Otomatis:</b> Input ID, data muncul sendiri (VLOOKUP).</li>
+                <li><span style="color:var(--primary); margin-right:8px;"></span> <b>Akurasi Data:</b> Perhitungan total otomatis, minim kesalahan manual.</li>
+                <li><span style="color:var(--primary); margin-right:8px;"></span> <b>Dashboard Visual:</b> Laporan harian dalam bentuk grafik yang simpel.</li>
+            </ul>
+        </div>
+
+        <div style="background: rgba(255,255,255,0.05); padding: 20px; border-radius: 15px; border: 1px dashed var(--primary);">
+            <p style="margin:0 0 10px 0; font-weight:600;"><i class="fas fa-check-circle"></i> Project Kolaborasi</p>
+            
+            <p style="font-size: 0.85rem; opacity: 0.8; margin-bottom:15px; line-height:1.5;">
+                Penerapan teknologi IT dalam Akuntansi untuk mengembangkan sistem otomatisasi data yang meminimalisir kesalahan input manual pada laporan transaksi
+            </p>
+            
+            <div style="display: flex; justify-content: center; margin-top: 20px;">
+    <a href="https://docs.google.com/spreadsheets/d/1Xt6EjgbLHVU7iDWJYUno-izu9Y5Dx1yV/edit?usp=sharing&ouid=105393064905607973312&rtpof=true&sd=true" target="_blank" class="btn btn-main" style="display: inline-flex; align-items: center; gap: 10px; text-decoration: none; justify-content: center;">
+        <i class="fas fa-external-link-alt"></i> Lihat Dashboard & Proyek
+    </a>
+</div>
+        </div>
+    `,
+    html_css: `
+        <h2 style="color:var(--primary); border-bottom: 2px solid rgba(255,77,166,0.2); padding-bottom: 10px;">
+            <i class="fab fa-html5"></i> HTML & CSS
+        </h2>
+        <p style="margin-top:15px; opacity:0.9;">Fokus pada pembuatan struktur website yang semantik dan desain antarmuka yang responsif.</p>
+        
+        <div style="margin: 20px 0;">
+            <ul style="padding-left: 20px; line-height: 1.8; list-style: none;">
+                <li><span style="color:var(--primary); margin-right:8px;"></span> <b>Responsive Layout:</b> Memastikan tampilan web rapi di layar HP maupun Laptop.</li>
+                <li><span style="color:var(--primary); margin-right:8px;"></span> <b>Modern CSS:</b> Implementasi tata letak presisi menggunakan Flexbox dan CSS Grid.</li>
+                <li><span style="color:var(--primary); margin-right:8px;"></span> <b>Semantic HTML:</b> Penulisan tag HTML yang terstruktur untuk kemudahan pengembangan.</li>
+            </ul>
+        </div>
+
+        <div style="background: rgba(255,255,255,0.05); padding: 20px; border-radius: 15px; border: 1px dashed var(--primary);">
+            <p style="margin:0 0 10px 0; font-weight:600;"><i class="fas fa-magic"></i> Styling Expertise</p>
+            <p style="font-size: 0.85rem; opacity: 0.8; margin-bottom:15px; line-height:1.5;">
+                Mampu mengubah konsep desain menjadi tampilan visual yang menarik dan rapi.
+            </p>
+            <div style="display: flex; justify-content: center; gap: 10px;">
+            <a href="https://github.com/intanesya" target="_blank" style="text-decoration: none; background: var(--primary); color: white; padding: 10px 25px; border-radius: 50px; font-weight: 600; display: flex; align-items: center; gap: 8px; box-shadow: 0 4px 15px rgba(255, 77, 166, 0.3);">
+                <i class="fab fa-github"></i> Buka GitHub
+            </a>
+        </div>
+        </div>
+    `,
+    data_entry: `
+    <h2 style="color:var(--primary); border-bottom: 2px solid rgba(255,77,166,0.2); padding-bottom: 10px;">
+        <i class="fas fa-list-ul"></i> Data Management & Entry
+    </h2>
+    <p style="margin-top:15px; opacity:0.9;">
+        Berpengalaman dalam mengelola informasi digital dengan tingkat akurasi tinggi dan manajemen basis data yang terstruktur.
+    </p>
+    
+    <div style="margin: 20px 0;">
+        <ul style="padding-left: 20px; line-height: 1.8; list-style: none;">
+            <li><span style="color:var(--primary); margin-right:8px;"></span> <b>Akurasi Tinggi:</b> Memastikan validitas data input tanpa kesalahan manual.</li>
+            <li><span style="color:var(--primary); margin-right:8px;"></span> <b>Manajemen Database:</b> Pengorganisasian data menggunakan SQL dan Excel.</li>
+            <li><span style="color:var(--primary); margin-right:8px;"></span> <b>Keamanan Data:</b> Menjamin kerahasiaan informasi yang dikelola.</li>
+        </ul>
+    </div>
+
+`,
+    data_analysis: `
+        <h2 style="color:var(--primary); border-bottom: 2px solid rgba(255,77,166,0.2); padding-bottom: 10px;">
+            <i class="fas fa-chart-line"></i> Data Analysis
+        </h2>
+        <p style="margin-top:15px; opacity:0.9;">Mentransformasikan data mentah menjadi informasi berharga untuk pengambilan keputusan yang akurat.</p>
+        
+        <div style="margin: 20px 0;">
+            <ul style="padding-left: 20px; line-height: 1.8; list-style: none;">
+                <li><span style="color:var(--primary); margin-right:8px;"></span> <b>Advanced Excel:</b> Penggunaan Pivot Tables, VLOOKUP/HLOOKUP, dan Power Query untuk pengolahan data kompleks.</li>
+                <li><span style="color:var(--primary); margin-right:8px;"></span> <b>SQL Fundamentals:</b> Memahami logika pengambilan data terstruktur (Querying) dari database.</li>
+                <li><span style="color:var(--primary); margin-right:8px;"></span> <b>Data Visualization:</b> Menyajikan data dalam bentuk grafik yang informatif dan mudah dipahami.</li>
+            </ul>
+        </div>
+
+        <div style="background: rgba(255,255,255,0.05); padding: 20px; border-radius: 15px; border: 1px dashed var(--primary);">
+            <p style="margin:0 0 10px 0; font-weight:600;"><i class="fas fa-lightbulb"></i> Analisis Proyek Akuntansi</p>
+            <p style="font-size: 0.85rem; opacity: 0.8; margin-bottom:15px; line-height:1.5;">
+                Berhasil menganalisis ribuan baris transaksi pada proyek <b>Accounting Digital Assistant</b> untuk mengidentifikasi tren keuangan secara otomatis.
+            </p>
+            <div style="display: flex; justify-content: center; margin-top: 15px;">
+                <button onclick="closeModal()" class="btn btn-main" style="border:none; cursor:pointer;">
+                   Kembali ke Portofolio
+                </button>
+            </div>
+        </div>
+    `,
+      
+        };
+
+        function openSkill(type) {
+        const modal = document.getElementById('skillModal');
+        document.getElementById('modalBody').innerHTML = skillData[type];
+        modal.style.display = "block";
+        }
+
+        function closeModal() {
+        document.getElementById('skillModal').style.display = "none";
+        }
+
+        window.onclick = function(event) {
+        const modal = document.getElementById('skillModal');
+        if (event.target == modal) { modal.style.display = "no n ne"; }
+        }
+        function openProject(type) {
+        const modal = document.getElementById('skillModal'); // Pakai modal yang sudah ada
+        if(type === 'accounting') {
+        document.getElementById('modalBody').innerHTML = `
+            <h2 style="color:var(--primary)">Rekapitulasi Kas</h2>
+            <div style="overflow:hidden; border-radius:10px; border:1px solid #ddd;">
+                <iframe src="LINK_EMBED_EXCEL_KAMU" width="100%" height="400"></iframe>
+            </div>
+            <a href="LINK_ASLI" target="_blank" class="btn btn-main" style="margin-top:20px; display:block; text-align:center;">Buka Full Screen</a>
+        `;
+    }
+    modal.style.display = "block";
+}
+    </script>
+   
+       
+</div>
+</body>
+</html>
